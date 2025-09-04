@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detailed Report: User Agent Types</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  <style>/* same */</style>
+</head>
+<body>
+  <h1>Detailed Report: User Agents</h1>
+  <p><strong>Question:</strong> What browsers/devices are visitors using?</p>
+
+  <div class="container">
+    <canvas id="userAgentChart"></canvas>
+    <zing-grid src="/api/static"></zing-grid>
+  </div>
+
+  <script>
+    fetch('/api/static')
+      .then(res => res.json())
+      .then(data => {
+        const agents = {};
+        data.forEach(row => {
+          const ua = row.userAgent?.split(' ')[0] || 'Unknown';
+          agents[ua] = (agents[ua] || 0) + 1;
+        });
+
+        const ctx = document.getElementById('userAgentChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: Object.keys(agents),
+            datasets: [{
+              data: Object.values(agents),
+              backgroundColor: ['blue', 'purple', 'green', 'gray', 'pink']
+            }]
+          },
+          options: {
+            plugins: {
+              title: { display: true, text: 'Distribution of User Agents' }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>

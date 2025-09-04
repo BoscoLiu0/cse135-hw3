@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detailed Report: Session Count</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  <style>/* same */</style>
+</head>
+<body>
+  <h1>Detailed Report: Unique Session IDs</h1>
+  <p><strong>Question:</strong> How many distinct sessions visited our site?</p>
+
+  <div class="container">
+    <canvas id="sessionChart"></canvas>
+    <zing-grid src="/api/static"></zing-grid>
+  </div>
+
+  <script>
+    fetch('/api/static')
+      .then(res => res.json())
+      .then(data => {
+        const uniqueSessions = new Set(data.map(x => x.sessionId)).size;
+
+        const ctx = document.getElementById('sessionChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Unique Sessions'],
+            datasets: [{
+              data: [uniqueSessions],
+              backgroundColor: 'teal'
+            }]
+          },
+          options: {
+            plugins: {
+              title: { display: true, text: 'Unique Visitor Sessions' }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>

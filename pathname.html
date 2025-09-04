@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detailed Report: Pathname</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  <style>/* same as above */</style>
+</head>
+<body>
+  <h1>Detailed Report: Pathname Visits</h1>
+  <p><strong>Question:</strong> Which pages are most frequently visited?</p>
+  <p><strong>Answer:</strong> Below chart shows distribution of page visits by pathname.</p>
+
+  <div class="container">
+    <canvas id="pathnameChart"></canvas>
+    <zing-grid src="/api/static"></zing-grid>
+  </div>
+
+  <script>
+    fetch('/api/static')
+      .then(res => res.json())
+      .then(data => {
+        const counts = {};
+        data.forEach(row => {
+          const path = row.pathname || '(unknown)';
+          counts[path] = (counts[path] || 0) + 1;
+        });
+        const labels = Object.keys(counts);
+        const values = Object.values(counts);
+
+        const ctx = document.getElementById('pathnameChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Visits',
+              data: values,
+              backgroundColor: 'steelblue'
+            }]
+          },
+          options: {
+            plugins: {
+              title: { display: true, text: 'Visits by Page Pathname' }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>

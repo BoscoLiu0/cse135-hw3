@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detailed Report: Page Load Time</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  <style>/* same */</style>
+</head>
+<body>
+  <h1>Detailed Report: Page Load Time</h1>
+  <p><strong>Question:</strong> How long does it take users to load our site?</p>
+  <p><strong>Answer:</strong> The chart shows the average page load time per session.</p>
+
+  <div class="container">
+    <canvas id="loadTimeChart"></canvas>
+    <zing-grid src="/api/performance"></zing-grid>
+  </div>
+
+  <script>
+    fetch('/api/performance')
+      .then(res => res.json())
+      .then(data => {
+        const times = data.map(x => parseInt(x.loadTime)).filter(x => !isNaN(x));
+        const avg = (times.reduce((a, b) => a + b, 0) / times.length).toFixed(2);
+
+        const ctx = document.getElementById('loadTimeChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Average Load Time (ms)'],
+            datasets: [{
+              data: [avg],
+              backgroundColor: 'orange'
+            }]
+          },
+          options: {
+            plugins: {
+              title: { display: true, text: 'Average Page Load Time' }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>
+
