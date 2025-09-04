@@ -1,32 +1,19 @@
-*Part5*
-My dashboard shows 3 metrics with 3 different types:
+## 📊 Dashboard Design
 
-1. **Visited Pathname** (Pie Chart):  
-   Helps show which pages are most visited.
+We chose 3 metrics:
+1. **Pathname** – bar chart showing most visited pages.
+2. **JavaScript Enabled** – pie chart showing which users have JS.
+3. **Full static data** – ZingGrid table with sortable/filterable sessions.
 
-2. **JavaScript Enabled** (Bar Chart):  
-   Shows if users have JS enabled or not, and connected type.
+Chart.js and ZingGrid are used. The data comes from `/api/static`. Charts are rendered dynamically on DOMContentLoaded.
 
-3. **ZingGrid Table**:  
-   Shows full static data from database. You can sort and search.
+---
 
-I use Chart.js and ZingGrid. The data comes from `/api/static` which is backed by a real database.  
-Charts are rendered dynamically after `DOMContentLoaded`.
+## 📄 Detailed Report (Part 6)
 
-*Part6*
-Report
+### Metric: `jsEnabled`
+### Question: How many users visiting our site have JavaScript enabled?
 
-Metric Chosen: jsEnabled
-Guiding Question: How many users visiting our site have JavaScript enabled?
-
-Chart Type: Pie chart
-Grid Tool: ZingGrid
-
-Reasoning:
-	•	JavaScript is essential for modern websites.
-	•	Understanding what percentage of users have it disabled helps plan fallbacks or accessibility.
-
-Design Decisions:
-	•	Chose a pie chart to visually show the proportion.
-	•	Grid lists sessions and user agents for detailed analysis.
-	•	The data source is /api/static.
+- **Chart type**: Pie chart (shows percentage visually).
+- **Grid**: Full static table using ZingGrid.
+- **Why**: JS is essential for analytics. Knowing how many users disable JS helps us design proper fallbacks.
