@@ -2,7 +2,7 @@
 - https://reporting.ucsdcse135.site
   
 ## 🧑‍🤝‍🧑 Team Members
-- Yanhua Liu
+- Liu
 
 ## 📊 Dashboard Design
 
@@ -25,7 +25,7 @@ Chart.js and ZingGrid are used. The data comes from `/api/static`. Charts are re
 - **Why**: JS is essential for analytics. Knowing how many users disable JS helps us design proper fallbacks.
 
 ## Extra Credit:
-  - `pathname.html`
-  - `loadtime.html`
-  - `useragent.html`
-  - `sessionid.html`
+- `pathname.html`: shows which pages are most visited.
+- `loadtime.html`: visualizes page load time performance.
+- `useragent.html`: displays the types of devices/browsers used.
+- `sessionid.html`: shows active session IDs and how they are tracked.
