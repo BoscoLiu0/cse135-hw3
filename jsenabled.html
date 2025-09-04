@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detailed Report: JavaScript Enabled</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    h1 { margin-bottom: 12px; }
+    #chartContainer { width: 600px; margin: 30px auto; }
+    zing-grid { height: 400px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Detailed Report: JavaScript Enabled</h1>
+
+  <div>
+    <p>
+      <strong>Question:</strong> How many users visiting our site have JavaScript enabled?<br />
+      <strong>Answer:</strong> The following chart and table show the distribution of users based on whether they had JavaScript enabled during their session.
+    </p>
+  </div>
+
+  <div id="chartContainer">
+    <canvas id="jsChart"></canvas>
+  </div>
+
+  <zing-grid id="jsGrid"
+             caption="JS Enabled Data"
+             src="https://ucsdcse135.site/api/static"
+             columns="session_id,user_agent,js_enabled,created_at">
+  </zing-grid>
+
+  <script src="jsenabled.js"></script>
+</body>
+</html>
+
