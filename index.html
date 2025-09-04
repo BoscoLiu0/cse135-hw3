@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics Reporting Dashboard</title>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- ZingGrid CDN -->
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #0b2c66;
+    }
+    section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+canvas {
+  max-width: 600px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+    zing-grid {
+      height: 500px;
+      --zg-head-bg: #123a4a;
+      --zg-head-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Analytics Reporting Dashboard</h1>
+
+  <!-- 1. Pathname Pie Chart -->
+  <section>
+    <h2>Visited Pathname Distribution</h2>
+    <canvas id="pathnameChart"></canvas>
+  </section>
+
+  <!-- 2. JavaScript Enabled Bar Chart -->
+  <section>
+    <h2>JavaScript Enabled (Boolean)</h2>
+    <canvas id="jsChart"></canvas>
+  </section>
+<!--3.Connection -->
+<section>
+  <h2>Connection Type</h2>
+  <canvas id="connChart"></canvas>
+</section>
+  <!-- 4. Session Info Grid -->
+  <section>
+    <h2>Static Data Table</h2>
+    <zing-grid caption="Static Data Table" theme="dark" src="/api/static"></zing-grid>
+  </section>
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>
